@@ -1,23 +1,27 @@
 package com.drakegao.springbootcamp;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
 	
-	@GetMapping("/songform")
-	public String loadFormPage(Model model) {
-		model.addAttribute("song", new Song());
-		return "songform";
+	@GetMapping("/tvform")
+	public String loadTvFormPage(Model model) {
+		model.addAttribute("tvshow", new Tvshow());
+		return "tvform";
 	}
 	
-	@PostMapping("/songform")
-	public String loadFromPage(@ModelAttribute Song song, Model model) {
-		model.addAttribute("song", song);
-		return "confirmsong";
+	@PostMapping("/tvform")
+	public String processTvForm(@Valid Tvshow tvshow, BindingResult result) {
+		if(result.hasErrors())
+			return "tvform";
+		
+		return "tvshowconfirm";
 	}
 }
