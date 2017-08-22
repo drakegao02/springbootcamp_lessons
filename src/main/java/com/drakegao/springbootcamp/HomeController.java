@@ -11,17 +11,4 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 	
-	@GetMapping("/tvform")
-	public String loadTvFormPage(Model model) {
-		model.addAttribute("tvshow", new Tvshow());
-		return "tvform";
-	}
-	
-	@PostMapping("/tvform")
-	public String processTvForm(@Valid Tvshow tvshow, BindingResult result) {
-		if(result.hasErrors())
-			return "tvform";
-		
-		return "tvshowconfirm";
-	}
 }
