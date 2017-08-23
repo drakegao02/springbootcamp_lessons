@@ -4,26 +4,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-public class Job {
+public class Course {
 	@Id // primary key
 	@GeneratedValue(strategy=GenerationType.AUTO) // auto increment
 	private long id;
 	
 	@NotNull
-	@Size(min=3)
+	@Size(min=4)
 	private String title;
 	
 	@NotNull
-	@Size(min=4)
-	private String employer;
+	@Size(min=3)
+	private String instructor;
 	
 	@NotNull
 	@Size(min=10)
 	private String description;
+	
+	@NotNull
+	@Min(3)
+	private int credit;
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
 
 	public long getId() {
 		return id;
@@ -41,12 +54,12 @@ public class Job {
 		this.title = title;
 	}
 
-	public String getEmployer() {
-		return employer;
+	public String getInstructor() {
+		return instructor;
 	}
 
-	public void setEmployer(String employer) {
-		this.employer = employer;
+	public void setInstructor(String instructor) {
+		this.instructor = instructor;
 	}
 
 	public String getDescription() {

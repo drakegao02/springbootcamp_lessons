@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+
+	<a href="/">Show All Courses</a>
+	
+	Title:<span th:inline="text">[[${course.title}]]</span>
+	Instructor:<span th:inline="text">[[${course.instructor}]]</span>
+	Description:<span th:inline="text">[[${course.description}]]</span>
+	Credits:<span th:inline="text">[[${course.credit}]]</span>
+	
+	<a href="@{/delete/{id}(id=${course.id})}">Delete this course</a>
+
+</body>
+</html>

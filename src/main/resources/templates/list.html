@@ -6,10 +6,26 @@
 </head>
 <body>
 	
-	<a href="/add">Add a Job</a>
-	<div th:each="job:${jobs}">
-		<h4 th:inline="text">[[${job.title}]] @ [[${job.employer}]]</h4>
-		<p th:text="${job.description}"></p>
-	</div>
+	<a href="/add">Add a Course</a>
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Instructor</th>
+			<th>Credits</th>
+			<th>Actions</th>
+		</tr>
+		
+		<tr th:each="course : ${courses}">
+			<td th:inline="text">[[${course.title}]]</td>
+			<td th:inline="text">[[${course.instructor}]]</td>
+			<td th:inline="text">[[${course.credit}]]</td>
+			<td>
+				<a th:href="@{/update/{id}(id=${course.id})}">Update</a>
+				<a th:href="@{/detail/{id}(id=${course.id})}">Details</a>
+				<a th:href="@{/delete/{id}(id=${course.id})}">Delete</a>
+			</td>
+		
+		</tr>
+	</table>
 </body>
 </html>

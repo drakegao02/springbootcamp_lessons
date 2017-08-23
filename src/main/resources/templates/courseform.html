@@ -5,15 +5,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="#" th:action="@{/process}" th:object="${job}" method="post">
+	<form action="#" th:action="@{/process}" th:object="${course}" method="post">
 		Title :<input type="text" th:field="*{title}" />
 		<span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span><br/>
 		
-		Employer :<input type="text" th:field="*{employer}" />
-		<span th:if="${#fields.hasErrors('employer')}" th:errors="*{employer}"></span><br/>
+		Instructor :<input type="text" th:field="*{instructor}" />
+		<span th:if="${#fields.hasErrors('instructor')}" th:errors="*{instructor}"></span><br/>
 		
 		Description :<input type="text" th:field="*{description}" />
 		<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br/>
+		
+		Credit :<input type="text" th:field="*{credit}" />
+		<span th:if="${#fields.hasErrors('credit')}" th:errors="*{credit}"></span><br/>
 		
 		<input type="submit" value="Submit" />
 	</form>

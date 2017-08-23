@@ -2,6 +2,6 @@ package com.drakegao.springbootcamp;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface JobRepository extends CrudRepository<Job, Long> {
+public interface CourseRepository extends CrudRepository<Course, Long> {
 	
 }
