@@ -1,56 +1,44 @@
 package com.drakegao.springbootcamp;
 
-import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
 	
 	@Autowired
-	CourseRepository courseRepository;
+	ActorRepository actorRepository;
 	
 	@RequestMapping("/")
-	public String listCourses(Model model) {
-		model.addAttribute("courses", courseRepository.findAll());
-		return "list";
-	}
-	
-	@RequestMapping("/add")
-	public String courseForm(Model model) {
-		model.addAttribute("course", new Course());
-		return "courseform";
-	}
-	
-	@PostMapping("/process")
-	public String processForm(@Valid Course course, BindingResult result) {
-		if(result.hasErrors())
-			return "courseform";
-		courseRepository.save(course);
-		return "redirect:/";
-	}
-	
-	@RequestMapping("/detail/{id}")
-	public String showCourse(@PathVariable("id") long id, Model model) {
-		model.addAttribute("course", courseRepository.findOne(id));
-		return "show";
-	}
-	
-	@RequestMapping("/update/{id}")
-	public String updateCourse(@PathVariable("id") long id, Model model) {
-		model.addAttribute("course", courseRepository.findOne(id));
-		return "courseform";
-	}
-	
-	@RequestMapping("/delete/{id}")
-	public String delCourse(@PathVariable("id") long id) {
-		courseRepository.delete(id);
-		return "redirect:/";
+	public String index(Model model) {
+		// first let's create an actor
+		Actor actor = new Actor();
+		actor.setName("Sandra Bullock");
+		actor.setRealname("Sandra Mae Bullowski");
+		
+		// create movie
+		Movie movie = new Movie();
+		movie.setTitle("Emoji Movie");
+		movie.setYear(2017);
+		movie.setDescription("About Emojis....");
+		
+		// add movie
+		Set<Movie> movies = new HashSet<Movie>();
+		movies.add(movie);
+		
+		// add the list of movies to the actor's movie list
+		actor.setMovies(movies);
+		
+		// save the actor the db
+		actorRepository.save(actor);
+		
+		// get all actors from db
+		model.addAttribute("actors", actorRepository.findAll());
+		return "index";
 	}
 }
